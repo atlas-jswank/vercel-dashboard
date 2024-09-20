@@ -3,6 +3,8 @@ import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import Image from "next/image";
 import placeholder from "@/assets/placeholder.svg";
+import { Button } from "./ui/button";
+import { signIn } from "@/auth";
 
 export default function Page() {
   return (
@@ -18,13 +20,17 @@ export default function Page() {
               scale your web applications with ease.
             </p>
             <div className="flex flex-col gap-2 min-[400px]:flex-row">
-              <Link
-                href="/login"
-                className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-                prefetch={false}
+              <form
+                action={async () => {
+                  "use server";
+                  await signIn("default", { redirectTo: "/dashboard" });
+                }}
               >
-                Login
-              </Link>
+                <button className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
+                  <div>Sign In</div>
+                </button>
+              </form>
+
               <Link
                 href="#"
                 className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
