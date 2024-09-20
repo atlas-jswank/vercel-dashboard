@@ -1,9 +1,8 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import type { User } from "@/app/lib/definitions";
 import { sql } from "@vercel/postgres";
-import { z } from "zod";
 import bcrypt from "bcryptjs";
+import type { User } from "@/app/lib/definitions";
 
 async function getUser(email: string): Promise<User | undefined> {
   try {
@@ -23,8 +22,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   providers: [
     Credentials({
-      // You can specify which fields should be submitted, by adding keys to the `credentials` object.
-      // e.g. domain, username, password, 2FA token, etc.
       credentials: {
         email: {
           label: "Email",
@@ -34,20 +31,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           type: "password",
         },
       },
-      authorize: async (credentials) => {
-        const parsedCredentials = z
-          .object({ email: z.string().email(), password: z.string().min(6) })
-          .safeParse(credentials);
-
-        if (parsedCredentials.success) {
-          const { email, password } = parsedCredentials.data;
-          const user = await getUser(email);
-          if (!user) return null;
-          const passwordsMatch = await bcrypt.compare(password, user.password);
-
-          if (passwordsMatch) return user;
-        }
-
+      //@ts-ignore
+      authorize: async (credentials: { email: string; password: string }) => {
+        const { email, password } = credentials;
+        const user = await getUser(email);
+        if (!user) return null;
+        const passwordsMatch = await bcrypt.compare(password, user.password);
+        if (passwordsMatch) return user;
         return null;
       },
     }),
