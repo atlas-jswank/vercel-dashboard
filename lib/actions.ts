@@ -40,6 +40,6 @@ export async function addTopic(data: FormData) {
     throw new Error("Failed to add topic.");
   } finally {
     revalidatePath("/ui/topics/[id]", "page");
-    redirect(`/ui/topics/${topic.id}`);
+    topic && redirect(`/ui/topics/${topic.id}`);
   }
 }

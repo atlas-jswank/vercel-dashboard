@@ -1,8 +1,6 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { sql } from "@vercel/postgres";
 import bcrypt from "bcryptjs";
-import type { User } from "@/lib/definitions";
 import { fetchUser } from "./lib/data";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -26,7 +24,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       authorize: async (credentials: { email: string; password: string }) => {
         const { email, password } = credentials;
         const user = await fetchUser(email);
-        if (!user) return null;
+        if (!user) return null; //@ts-ignore
         const passwordsMatch = await bcrypt.compare(password, user.password);
         if (passwordsMatch) return user;
         return null;
