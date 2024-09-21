@@ -1,6 +1,4 @@
 import Link from "next/link";
-import { PowerIcon } from "@heroicons/react/24/outline";
-import { signOut } from "@/auth";
 import Image from "next/image";
 import logo from "@/assets/logo.png";
 import TopicLinks from "./TopicLinks";
