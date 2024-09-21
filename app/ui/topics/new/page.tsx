@@ -1,5 +1,4 @@
 import CreateTopicForm from "@/components/CreateTopicForm";
-import React from "react";
 
 export default function Page() {
   return (

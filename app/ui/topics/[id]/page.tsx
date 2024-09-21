@@ -2,7 +2,6 @@ import { AskQuestion } from "@/components/AskQuestion";
 import { Question } from "@/components/Question";
 import { fetchQuestions, fetchTopic } from "@/lib/data";
 import { HashtagIcon } from "@heroicons/react/24/outline";
-import React from "react";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const topic = await fetchTopic(params.id);

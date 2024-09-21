@@ -1,7 +1,5 @@
-import { PlusCircleIcon, PowerIcon } from "@heroicons/react/24/outline";
-import { signOut } from "next-auth/react";
+import { PlusCircleIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import React from "react";
 
 export default function NewTopicButton() {
   return (
