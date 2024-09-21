@@ -1,9 +1,6 @@
-import AcmeLogo from "@/app/ui/acme-logo";
-import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import Image from "next/image";
 import placeholder from "@/assets/placeholder.svg";
-import { Button } from "./ui/button";
 import { signIn } from "@/auth";
 
 export default function Page() {
@@ -23,7 +20,7 @@ export default function Page() {
               <form
                 action={async () => {
                   "use server";
-                  await signIn("default", { redirectTo: "/app" });
+                  await signIn("default", { redirectTo: "/ui" });
                 }}
               >
                 <button className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
@@ -32,7 +29,7 @@ export default function Page() {
               </form>
 
               <Link
-                href="#"
+                href="/about"
                 className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                 prefetch={false}
               >

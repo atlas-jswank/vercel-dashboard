@@ -1,16 +1,16 @@
-import "@/app/ui/global.css";
-import { inter } from "@/app/ui/fonts";
+import "@/app/global.css";
+import { inter } from "@/app/fonts";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Full Stack Next.js | Atlas School",
 };
 
-export default function RootLayout({
-  children,
-}: {
+type Props = {
   children: React.ReactNode;
-}) {
+};
+
+export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased text-secondary`}>
